@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+  <meta charset="UTF-8">
+  <title>Spolier Hidup Lo & Truth or Dare</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #1e1e1e;
+      color: white;
+      text-align: center;
+      padding-top: 50px;
+      transition: background-color 0.5s ease;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    button {
+      padding: 15px 30px;
+      background: #00c8a8;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    button:hover {
+  background-color: #ff4ec5;
+}
+
+    #ramalan, #output {
+      margin-top: 40px;
+      font-size: 20px;
+      min-height: 50px;
+    }
+
+    #counter {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #bbbbbb;
+    }
+
+    #btnShare {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      margin: 0;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Spolier Hidup Lo Hari Ini 👀 & Truth or Dare</h1>
+
+  <button id="btnRamalan">Spoiler Idup Lo 👀</button>
+  <div id="ramalan"></div>
+  <div id="counter"></div>
+</div>
+
+
+  <button onclick="getTruth()">Truth</button>
+  <button onclick="getDare()">Dare</button>
+
+  <div id="output"></div>
+
+  <button id="btnShare">Bagikan ke temen lo</button>
+
+
+  <audio id="klikSound" src="ding-sound-effect_1_0gpHFnw.mp3" preload="auto"></audio>
+
+
+  <script>
+    const ramalanList = [
+      "Lo bakal ngerasa capek, padahal nggak ngapa-ngapain.",
+      "Harapan lo hari ini: kecil. Realita: lebih kecil lagi.",
+      "Lo scrolling HP 3 jam, nyari apa juga nggak tau.",
+      "Buka kulkas, padahal tadi juga udah dibuka... isinya tetep sama.",
+      "Hari ini lo bakal ngeluh ke tembok, karena manusia udah males dengerin.",
+      "Energi lo hari ini: kayak koneksi 2G di zaman 5G.",
+      "Lo bakal ngelakuin sesuatu... terus nyesel.",
+      "Mood lo: pengen rebahan di dimensi lain.",
+      "Senyum lo hari ini: 20% tulus, 80% pura-pura hidup.",
+      "Pikiran lo bakal nyasar, tolong panggilin balik kalau udah nemu."
+    ];
+
+    const truthQuestions = [
+      "Pernah nggak bohong sampe teman lo jadi marah?",
+      "Siapa orang yang paling lo gak suka di sekolah? dan kenapa.",
+      "Apa yang bikin lo malu banget waktu kecil?",
+      "Siapa yang lo suka tapi gak pernah bilang sampai sekarang?",
+      "Pernah nggak lo ngerasa nyesel sama keputusan yang lo ambil?, dan keputusan apa yang telah lo ambil."
+    ];
+
+    const dareChallenges = [
+      "Teriak, Aku Suka Aquaaaa.",
+      "Ngomong 'I love you' ke crush.",
+      "Minum air sebanyak mungkin dalam 5 detik.",
+      "Lakukan suara hewan apa pun yang diminta orang di sekitar.",
+      "Bikin velocity pake lagu brutal.",
+      "Post SG muka jelek.",
+      "Tiruin 1 SG orang random yang lo follow"
+    ];
+
+    const btn = document.getElementById("btnRamalan");
+    const shareBtn = document.getElementById("btnShare");
+    const ramalan = document.getElementById("ramalan");
+    const klikSound = document.getElementById("klikSound");
+    const counter = document.getElementById("counter");
+    const output = document.getElementById("output");
+
+    let clickCount = 0;
+
+    function getRandomColor() {
+      const colors = ["#1e1e1e", "#3a1e3f", "#2e2e54", "#1e3f3f", "#2b1e1e"];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    btn.addEventListener("click", () => {
+      const index = Math.floor(Math.random() * ramalanList.length);
+      const result = ramalanList[index];
+      document.body.style.backgroundColor = getRandomColor();
+      klikSound.currentTime = 0;
+      klikSound.play();
+      ramalan.innerText = result;
+      clickCount++;
+      counter.innerText = `Lo udah klik ${clickCount} kali. Banyak amat spoiler yang lo butuhin?`;
+
+      if (clickCount === 1) {
+        btn.innerText = "Kasih Spoiler Lagi!";
+      }
+    });
+
+    shareBtn.addEventListener("click", () => {
+      alert("Fitur ini belum tersedia. Kasih tau temen lo secara manual ya :3");
+    });
+
+    function getTruth() {
+      const question = truthQuestions[Math.floor(Math.random() * truthQuestions.length)];
+      output.innerHTML = `<strong>Truth:</strong> ${question}`;
+    }
+
+    function getDare() {
+      const challenge = dareChallenges[Math.floor(Math.random() * dareChallenges.length)];
+      output.innerHTML = `<strong>Dare:</strong> ${challenge}`;
+    }
+  </script>
+
+</body>
+</html>
